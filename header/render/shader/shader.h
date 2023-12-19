@@ -2,7 +2,6 @@
 #include "gl.h"
 #include "glm.h"
 #include "render/shader/checker.h"
-#include <string_view>
 
 struct Shader {
 private:

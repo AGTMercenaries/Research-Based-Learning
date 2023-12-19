@@ -6,8 +6,6 @@
 #include "render.h"
 #include "misc.h"
 
-Camera cam;
-
 int main() {
 	// 一些准备工作
 	glfwInit();

@@ -5,9 +5,15 @@
 #include "input.h"
 #include "render.h"
 #include "misc.h"
+//#include "loader.h"
+#include "loader/anvil.h"
 
 int main() {
 	// 一些准备工作
+	
+	Anvil("temp\\r.0.0.mca");
+
+	return 0;
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);

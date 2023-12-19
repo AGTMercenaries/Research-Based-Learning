@@ -1,11 +1,11 @@
 #include "utils/file.h"
 
-std::string getFile(std::string name) {
+std::string getFile(std::string locate) {
 	std::ifstream stream;
 	std::string str;
 	stream.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 	try {
-		stream.open(path + std::string("resource\\") + name);
+		stream.open(getFullPath(locate));
 		std::stringstream ss;
 		ss << stream.rdbuf();
 		stream.close();
@@ -16,4 +16,7 @@ std::string getFile(std::string name) {
 		assert(false);
 	}
 	return std::move(str);
+}
+std::string getFullPath(std::string locate) {
+	return path + std::string("resource\\") + locate;
 }

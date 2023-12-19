@@ -1,7 +1,7 @@
 #include "input.h"
 
 int width = 2400, height = 3600;
-Camera cam;
+//Camera cam;
 
 void processInput(GLFWwindow* window) {
 	processKeyboard(window);

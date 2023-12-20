@@ -8,10 +8,13 @@
 //#include "loader.h"
 #include "loader/anvil.h"
 
+void checknbt();
+
 int main() {
 	// 一些准备工作
+	checknbt();
+//	Anvil("temp\\r.0.0.mca");
 	
-	Anvil("temp\\r.0.0.mca");
 
 	return 0;
 	glfwInit();

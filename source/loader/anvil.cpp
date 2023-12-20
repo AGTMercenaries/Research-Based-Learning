@@ -1,9 +1,11 @@
 #include "loader/anvil.h"
 #include "utils/file.h"
+#include "utils/trans.h"
 
+#include <iostream>
+#include <cassert>
 #include <fstream>
 
-#define BE2LE_32BIT(x) ((x & 0x000000ff) << 24) | ((x & 0x0000ff00) << 8) | ((x & 0x00ff0000) >> 8) | ((x & 0xff000000) >> 24)
 
 Anvil::Anvil(std::string location) {
 	std::ifstream ifs(getFullPath(location), std::ios::in | std::ios::binary);

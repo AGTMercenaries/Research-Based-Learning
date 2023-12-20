@@ -4,5 +4,5 @@
 
 struct Chunk {
 	Chunk(u8* data);
-	Chunk() = default;
+	Chunk();
 };

@@ -8,6 +8,7 @@
 *.vcxproj
 *.vcxproj.filters
 path.cpp
+cpp.hint
 
 resource/temp/*
 resource/tool/*

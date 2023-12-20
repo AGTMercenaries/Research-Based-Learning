@@ -1,26 +1,54 @@
 #include "loader/nbt.h"
-
 #include "utils/file.h"
-#include <Windows.h>
+
 #include <iostream>
+#include <cassert>
+#include <format>
 
-std::string getsNBT(std::string locate) {
-	std::string rNBT = getFullPath(locate);
-	std::string sNBT = getFullPath("temp\\.snbt");
-	std::string exe = getFullPath("tool\\SnbtCmd.exe");
-	std::string command = exe + R"( path ")" + rNBT + R"(" to-snbt > )" + sNBT;
-	std::cout << command << std::endl;
-	system(command.c_str());
-	std::string result = getFile("temp\\.snbt");
-	std::cout << result << std::endl;
-	return result;
+static void putTab(int dep) {
+	for (int i = 1; i <= dep * 2; i++) std::cout << " ";
 }
 
-static std::string sNBT;
-static pNBT parse(int l, int r) {
-	return pNBT(new NBT());
+void NBT::print(int dep) {
+	std::cout << "NBT::print a null nbt" << std::endl;
+	assert(false);
 }
-pNBT getoNBT(std::string sNBT) {
-	::sNBT = sNBT;
-	return parse(0, 0);
+#define helper(NAME)                                            \
+void NAME::print(int dep) {                                     \
+	putTab(dep);                                                \
+	std::cout << type << std::format(R"(({}): {})", name, val); \
+}                                                        
+
+helper(Byte)
+helper(Bool)
+helper(Short)
+helper(Int)
+helper(Long)
+helper(Float)
+helper(Double)
+helper(String, std::string)
+void Compound::print(int dep) {
+	putTab(dep), std::cout << type << std::format(R"(({}): {} entries)", name, val.size()) << std::endl;
+	putTab(dep), std::cout << "{" << std::endl;
+	for (auto& [_, ptr] : val) ptr->print(dep + 1);
+	putTab(dep), std::cout << "}" << std::endl;
+}
+
+#define lister(NAME)                                                                                      \
+void NAME::print(int dep) {                                                                               \
+	putTab(dep), std::cout << type << std::format(R"(({}): {} entries)", name, val.size()) << std::endl;  \
+	putTab(dep), std::cout << "[" << std::endl;                                                           \
+	for (auto& ptr : val) ptr->print(dep + 1);                                                            \
+	putTab(dep), std::cout << "]" << std::endl;                                                           \
+}        
+helper(ByteArray)
+helper(IntArray)
+helper(LongArray)
+
+
+pNBT parseNBT(u8* data) {
+	u8 type = *data;
+	switch (type) {
+	case 0: 
+	}
 }

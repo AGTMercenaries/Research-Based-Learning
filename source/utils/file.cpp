@@ -1,4 +1,8 @@
 #include "utils/file.h"
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include <cassert>
 
 std::string getFile(std::string locate) {
 	std::ifstream stream;

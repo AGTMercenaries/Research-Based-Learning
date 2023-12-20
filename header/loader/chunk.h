@@ -1,8 +1,11 @@
 #pragma once
 
 #include "loader/misc.h"
+#include "loader/nbt.h"
 
 struct Chunk {
-	Chunk(u8* data);
+	pNBT data;
+
+	Chunk(u8* rawData);
 	Chunk();
 };

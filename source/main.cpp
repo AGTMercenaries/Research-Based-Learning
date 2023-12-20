@@ -10,12 +10,20 @@
 
 void checknbt();
 
+
 int main() {
 	// 一些准备工作
-	checknbt();
-//	Anvil("temp\\r.0.0.mca");
-	
-
+	//checknbt();
+	{
+		auto anvil = Anvil("temp\\r.0.0.mca");
+	}
+	while (true) {}
+	//for (int i = 0; i < 32; i++)
+	//	for (int j = 0; j < 32; j++)
+	//		if (anvil.chunk[i][j].data) {
+	//			anvil.chunk[i][j].data->print();
+	//			return 0;
+	//		}
 	return 0;
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);

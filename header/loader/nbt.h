@@ -2,7 +2,6 @@
 #include "loader/misc.h"
 
 #include <string>
-#include <string_view>
 #include <map>
 #include <vector>
 #include <memory>
@@ -14,6 +13,7 @@ struct NAME : NBT {                \
 	NAME(u8*& data); \
 	virtual void print(int dep = 0) override; \
 	virtual u8 getType() override;  \
+	virtual ~NAME() = default;  \
 }
 
 
@@ -23,6 +23,7 @@ struct NBT {
 	NBT(); // only with payload
 	virtual void print(int dep = 0);
 	virtual u8 getType();
+	virtual ~NBT() = default;
 };
 using pNBT = std::unique_ptr<NBT>;
 
@@ -32,6 +33,7 @@ struct End : NBT {
 	End();
 	virtual void print(int dep = 0) override;
 	virtual u8 getType() override;
+	virtual ~End() = default;
 };
 helper(Byte, 1, char);
 helper(Short, 2, short);
@@ -53,11 +55,8 @@ struct List : NBT {
 	List(u8*& data);
 	virtual void print(int dep = 0) override;
 	virtual u8 getType() override;
+	virtual ~List() = default;
 };
 
 pNBT parseNBT(u8*& data);
 #undef helper
-
-
-
-

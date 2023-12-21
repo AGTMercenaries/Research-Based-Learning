@@ -5,6 +5,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <memory>
 
 Chunk::Chunk() {}
 Chunk::Chunk(u8* rawData) {
@@ -17,4 +18,11 @@ Chunk::Chunk(u8* rawData) {
 	auto ptrData = binaryData;
 	data = parseNBT(ptrData);
 	delete[] binaryData;
+}
+
+void Chunk::debug() {
+	auto root = dynamic_cast<Compound*>(data.get());
+	auto level = dynamic_cast<Compound*>(root->val["Level"].get());
+	auto sections = dynamic_cast<List*>(level->val["Sections"].get());
+	sections->print();
 }

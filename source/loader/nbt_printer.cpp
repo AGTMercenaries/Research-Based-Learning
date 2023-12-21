@@ -27,7 +27,10 @@ static const std::string typeName[] = {
 	"Null", "Byte", "Short", "Int", "Long", "Float", "Double", "ByteArray", "String", "List", "Compound", "IntArray", "LongArray"
 };
 
-helper(Byte)
+void Byte::print(int dep) {
+	putTab(dep);
+	std::cout << typeName[type] << std::format(R"(('{}'): {})", name, int(val)); 
+}
 helper(Short)
 helper(Int)
 helper(Long)
@@ -56,5 +59,5 @@ void List::print(int dep) {
 	putTab(dep), std::cout << typeName[type] << std::format(R"(('{}'): {} entries)", name, val.size()) << std::endl;
 	putTab(dep), std::cout << "{" << std::endl;
 	for (auto& ptr : val) ptr->print(dep + 1);
-	putTab(dep), std::cout << std::endl << "}" << std::endl;
+	std::cout << std::endl, putTab(dep), std::cout << "}" << std::endl;
 }

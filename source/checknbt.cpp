@@ -7,6 +7,17 @@
 
 #include <vector>
 #include <format>
+#include <memory>
+#include <map>
+
+struct FOO {
+	~FOO() {
+		std::cout << "FOO delete" << std::endl;
+	}
+};
+struct BOO {
+	FOO t;
+};
 
 void checknbt() {
 

@@ -8,4 +8,5 @@ struct Chunk {
 
 	Chunk(u8* rawData);
 	Chunk();
+	void debug();
 };

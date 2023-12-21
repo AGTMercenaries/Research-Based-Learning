@@ -10,21 +10,20 @@
 
 void checknbt();
 
-
 int main() {
-	// 一些准备工作
-	//checknbt();
-	{
-		auto anvil = Anvil("temp\\r.0.0.mca");
-	}
-	while (true) {}
-	//for (int i = 0; i < 32; i++)
-	//	for (int j = 0; j < 32; j++)
-	//		if (anvil.chunk[i][j].data) {
-	//			anvil.chunk[i][j].data->print();
-	//			return 0;
-	//		}
+	//checknbt(); 
+	auto anvil = new Anvil("temp\\r.0.0.mca");
+	int p = 25;
+	for (int i = 0; i < 32; i++)
+		for (int j = 0; j < 32; j++)
+			if (anvil->chunk[i][j].data) {
+				anvil->chunk[i][j].debug();
+				p--;
+				if (!p) return 0;
+			}
 	return 0;
+	
+	// 一些准备工作
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -33,7 +32,7 @@ int main() {
 	GLFWwindow* window = glfwCreateWindow(width, height, "Game", NULL, NULL);
 	if (window == nullptr) {
 		std::cout << "Failed to create GLFW window" << std::endl;
-		glfwTerminate();
+		glfwTerminate();	
 		return -1;
 	}
 	glfwMakeContextCurrent(window);

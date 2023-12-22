@@ -1,0 +1,6 @@
+// 提示文件帮助 Visual Studio IDE 解释 Visual C++ 标识符,
+// 如函数和宏的名称。
+// 有关详细信息，请参见 https://go.microsoft.com/fwlink/?linkid=865984
+#define lister(NAME) void NAME::print(int dep) { putTab(dep), std::cout << type << std::format(R"(({}): )", name); std::cout << "["; for (auto i = val.begin(); i != val.end(); i++) { std::cout << *i; if (next(i) != val.end()) std::cout << ", "; } putTab(dep), std::cout << "]" << std::endl; }
+#define helper(NAME, __VA_ARGS__) struct NAME : NBT { __VA_ARGS__ val; std::string_view type = #NAME; virtual void print(int dep = 0) override; }
+#define helper(NAME) void NAME::print(int dep) { putTab(dep); std::cout << type << std::format(R"(({}): {})", name, val); }

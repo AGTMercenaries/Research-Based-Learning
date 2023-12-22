@@ -8,6 +8,7 @@
 *.vcxproj
 *.vcxproj.filters
 path.cpp
+resource/temp/*
 
 # User-specific files
 *.rsuser

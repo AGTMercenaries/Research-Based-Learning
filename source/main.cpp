@@ -7,12 +7,13 @@
 #include "misc.h"
 //#include "loader.h"
 #include "loader/anvil.h"
+#include "render/texture/texture.h"
 
 void checknbt();
 
 int main() {
 	//checknbt(); 
-	auto anvil = new Anvil("temp\\r.0.0.mca");
+	/*auto anvil = new Anvil("temp\\r.0.0.mca");
 	int p = 25;
 	anvil->query(11, 63, 11)->print();
 	return 0;
@@ -23,7 +24,7 @@ int main() {
 				p--;
 				if (!p) return 0;
 			}
-	return 0;
+	return 0;*/
 	
 	// 一些准备工作
 	glfwInit();
@@ -49,7 +50,8 @@ int main() {
 
 	//initTriangle(window);
 	TestCube cube(window);
-	// 开启渲染循环
+	Texture texture("texture\\test.jpg");
+	// ������Ⱦѭ��
 	while (!glfwWindowShouldClose(window)) {
 		processInput(window);
 
@@ -58,6 +60,7 @@ int main() {
 		//glDepthMask(GL_FALSE);
 		// 在这里做一些渲染工作
 		//testTriangle(window, cam);
+		texture.use();
 		cube.render();
 
 		glfwSwapBuffers(window);

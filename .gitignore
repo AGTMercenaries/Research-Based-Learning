@@ -10,6 +10,9 @@
 path.cpp
 resource/temp/*
 
+resource/temp/*
+resource/tool/*
+
 # User-specific files
 *.rsuser
 *.suo

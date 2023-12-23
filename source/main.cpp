@@ -14,7 +14,7 @@ int main() {
 	//checknbt(); 
 	auto anvil = new Anvil("temp\\r.0.0.mca");
 	int p = 25;
-	anvil->chunk[0][0].query(11, 63, 11)->print();
+	anvil->query(11, 63, 11)->print();
 	return 0;
 	for (int i = 0; i < 32; i++)
 		for (int j = 0; j < 32; j++)

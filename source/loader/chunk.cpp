@@ -40,7 +40,6 @@ Compound* Chunk::query(int x, int y, int z) {
 		auto sub = dynamic_cast<Compound*>(sections->val[id].get());
 		blockStates = dynamic_cast<Compound*>(sub->val["block_states"].get());
 		palette = dynamic_cast<List*>(blockStates->val["palette"].get());
-		fprintf(stderr, "%d\n", (int) blockStates->val.size());
 		dataArray = dynamic_cast<LongArray*>(blockStates->val["data"].get());
 		dataBit = ceil(log2((palette->val).size()));
 	}
@@ -59,12 +58,10 @@ Compound* Chunk::query(int x, int y, int z) {
 			revee >>= 1;
 		}
 	}
-	for (int i = 0; i < 64; ++i) fprintf(stderr, "%d", bits[i]);
-	fprintf(stderr, "\n");
 
 	int index = 0;
 	for (int l = blockId % (64 / dataBit) * dataBit, r = l + dataBit, i = r-1; i >= l; --i)
-		index = index << 1 | bits[i];
+		index = index << 1 | (int)bits[i];
 	if (palette->val.size() <= index) {
 		fprintf(stderr, "palette length not enough!\n");
 		assert(false);

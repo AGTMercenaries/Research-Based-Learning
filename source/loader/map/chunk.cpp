@@ -1,7 +1,6 @@
-#include "loader/chunk.h"
-#include "loader/compress.h"
-#include "utils/trans.h"
-#include "utils/file.h"
+#include "loader/map/chunk.h"
+#include "loader/utils/compress.h"
+#include "loader/utils/trans.h"
 
 #include <cassert>
 #include <iostream>

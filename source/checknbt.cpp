@@ -1,9 +1,8 @@
 #include <iostream>
 #include <fstream>
 
-#include "utils/file.h"
-#include "loader/misc.h"
-#include "loader/nbt.h"
+#include "loader/utils/misc.h"
+#include "loader/utils/nbt.h"
 
 #include <vector>
 #include <format>

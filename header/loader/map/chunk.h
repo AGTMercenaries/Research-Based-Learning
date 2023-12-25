@@ -1,7 +1,7 @@
 #pragma once
 
-#include "loader/misc.h"
-#include "loader/nbt.h"
+#include "loader/utils/misc.h"
+#include "loader/utils/nbt.h"
 
 struct Chunk {
 	pNBT data;

@@ -10,8 +10,7 @@
 path.cpp
 resource/temp/*
 
-resource/temp/*
-resource/tool/*
+resource/textures/*
 
 # User-specific files
 *.rsuser

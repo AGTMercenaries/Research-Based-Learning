@@ -14,8 +14,8 @@ void mouseMoveCallBack(GLFWwindow* window, double xpos, double ypos) {
 	float yPos = static_cast<float>(ypos);
 	float xoffset = xPos - lastX;
 	float yoffset = lastY - yPos;
-	lastX = xpos;
-	lastY = ypos;
+	lastX = static_cast<float>(xpos);
+	lastY = static_cast<float>(ypos);
 
 	float sensitivity = 0.05f;
 	xoffset *= sensitivity;

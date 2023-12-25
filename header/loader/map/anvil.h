@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 
-#include "loader/misc.h"
-#include "loader/chunk.h"
+#include "loader/utils/misc.h"
+#include "loader/map/chunk.h"
 
 struct Anvil {
 	Chunk chunk[32][32];

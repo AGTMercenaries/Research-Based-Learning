@@ -1,5 +1,5 @@
-#include "loader/nbt.h"
-#include "utils/trans.h"
+#include "loader/utils/nbt.h"
+#include "loader/utils/trans.h"
 
 #include <iostream>
 #include <cassert>

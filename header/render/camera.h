@@ -1,6 +1,6 @@
 #pragma once
 #include "gl.h"
-#include "glm.h"
+#include "utils/glm.h"
 #include <iostream>
 
 struct Camera {

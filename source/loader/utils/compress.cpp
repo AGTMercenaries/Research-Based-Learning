@@ -1,4 +1,4 @@
-#include "loader/compress.h"
+#include "loader/utils/compress.h"
 #include <zlib/zlib.h>
 #include <iostream>
 #include <cassert>

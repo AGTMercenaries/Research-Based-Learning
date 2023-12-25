@@ -6,7 +6,7 @@
 #include "render.h"
 #include "misc.h"
 //#include "loader.h"
-#include "loader/anvil.h"
+#include "loader/map/anvil.h"
 #include "render/texture/texture.h"
 
 void checknbt();

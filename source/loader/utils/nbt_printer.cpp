@@ -1,4 +1,4 @@
-#include "loader/nbt.h"
+#include "loader/utils/nbt.h"
 
 #include <iostream>
 #include <cassert>

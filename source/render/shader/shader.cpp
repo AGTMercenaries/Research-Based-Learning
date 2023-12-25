@@ -1,5 +1,5 @@
 #include "render/shader/shader.h"
-#include "utils/file.h"
+#include "resource/text.h"
 
 #include <iostream>
 #include <fstream>
@@ -7,29 +7,27 @@
 #include <exception>
 #include <cassert>
 
-Shader::Shader(std::string name) {
-
-	std::string vs = getFile("shader\\" + name + ".vs");
-	std::string fs = getFile("shader\\" + name + ".fs");
-	const char* vShaderCode = vs.c_str();
-	const char* fShaderCode = fs.c_str();
+Shader::Shader(Location loc) {
+	auto vText = Text(loc, "vs"), fText = Text(loc, "fs");
+	const char* vShaderCode = vText.context.c_str();
+	const char* fShaderCode = fText.context.c_str();
 
 	unsigned int vertex, fragment;
 	vertex = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertex, 1, &vShaderCode, NULL);
 	glCompileShader(vertex);
-	checkShaderCompile(vertex, name + ".vs");
+	checkShaderCompile(vertex, loc);
 
 	fragment = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragment, 1, &fShaderCode, NULL);
 	glCompileShader(fragment);
-	checkShaderCompile(fragment, name + ".fs");
+	checkShaderCompile(fragment, loc);
 
 	ID = glCreateProgram();
 	glAttachShader(ID, vertex);
 	glAttachShader(ID, fragment);
 	glLinkProgram(ID);
-	checkProgramLink(ID, name);
+	checkProgramLink(ID, loc);
 
 	glDeleteShader(vertex);
 	glDeleteShader(fragment);

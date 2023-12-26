@@ -46,5 +46,7 @@ Compound* Anvil::query(int x, int y, int z) {
 		fprintf(stderr, "x or z exceed the range!");
 		assert(false);
 	}
-	return chunk[chunkx][chunkz].query(x % 16, y, z % 16);
+
+	return chunk[chunkz][chunkx].query(x % 16, y, z % 16);
 }
+

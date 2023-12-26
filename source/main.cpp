@@ -25,7 +25,7 @@ int main() {
 			}
 	return 0;
 	
-	// Ò»Ğ©×¼±¸¹¤×÷
+	// ä¸€äº›å‡†å¤‡å·¥ä½œ
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -43,20 +43,20 @@ int main() {
 		return -1;
 	}
 
-	// ÉèÖÃ´°¿Ú´óĞ¡
+	// è®¾ç½®çª—å£å¤§å°
 	setInputCallbacks(window);
 	glEnable(GL_DEPTH_TEST);
 
 	//initTriangle(window);
 	TestCube cube(window);
-	// ¿ªÆôäÖÈ¾Ñ­»·
+	// å¼€å¯æ¸²æŸ“å¾ªç¯
 	while (!glfwWindowShouldClose(window)) {
 		processInput(window);
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		//glDepthMask(GL_FALSE);
-		// ÔÚÕâÀï×öÒ»Ğ©äÖÈ¾¹¤×÷
+		// åœ¨è¿™é‡Œåšä¸€äº›æ¸²æŸ“å·¥ä½œ
 		//testTriangle(window, cam);
 		cube.render();
 
@@ -64,7 +64,7 @@ int main() {
 		glfwPollEvents();
 	}
 
-	// ÇåÀíÄÚ´æ
+	// æ¸…ç†å†…å­˜
 
 	glfwTerminate();
 	return 0;

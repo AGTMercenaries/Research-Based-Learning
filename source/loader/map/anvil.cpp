@@ -6,19 +6,39 @@
 #include <fstream>
 #include "resource.h"
 
-Anvil::Anvil(Location loc) {
-	Binary data(AnvilFile(loc));
-	for (int x = 0; x < 32; x++)
-		for (int y = 0; y < 32; y++) {
-			int p = (x << 5) | y;
-			u32 chunkInfo = *(u32*)(data.data + p * 4);
-			if (chunkInfo != 0) {
-				u8* infoPtr = (u8*)&chunkInfo;
-				infoPtr[3] = 0; // Useless info : chunk size
-				/* Big endian to Little endian */
-				chunkInfo = BE2LE_32BIT(chunkInfo);
-				size_t chunkOffset = (chunkInfo >> 8) * 4096;
-				chunk[x][y] = Chunk(data.data + chunkOffset);
-			}
-		}
+Anvil::Anvil(Location loc) : data(AnvilFile(loc)) {
+	offset = data.getData(0, 4096);
+}
+Chunk& Anvil::loadChunk(int x, int z) {
+	if (chunk[x][z].data) return chunk[x][z];
+	int p = (x << 5) | z;
+	auto pChunkInfo = data.getData(p * 4, 4);
+	u32 chunkInfo = *(u32*)(pChunkInfo);
+	delete pChunkInfo;
+	if (chunkInfo != 0) {
+		u8* infoPtr = (u8*)&chunkInfo;
+		infoPtr[3] = 0; // Useless info : chunk size
+		/* Big endian to Little endian */
+		chunkInfo = BE2LE_32BIT(chunkInfo);
+		size_t chunkOffset = (chunkInfo >> 8) * 4096;
+
+		u8 *pRawLen = data.getData(chunkOffset, 4);
+		u32 rawLen = *(u32*)pRawLen;
+		delete pRawLen;
+		rawLen = BE2LE_32BIT(rawLen);
+		
+		u8* rawData = data.getData(chunkOffset + 5, rawLen); // 4 byte length | 1 byte compress method
+		
+		chunk[x][z] = Chunk(rawLen, rawData);
+		
+		delete rawData;
+	}
+	return chunk[x][z];
+}
+void Anvil::unloadChunk(int x, int z) {
+	chunk[x][z].data.release();
+}
+
+Anvil::~Anvil() {
+	delete offset;
 }

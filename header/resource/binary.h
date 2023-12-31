@@ -1,9 +1,12 @@
 #pragma once
 #include "resource/location.h"
+#include <fstream>
 
 struct Binary {
-	unsigned char* data;
+private:
+	std::fstream stream;
 
+public:
 	Binary(Path loc);
-	~Binary();
+	unsigned char* getData(size_t pos, size_t len);
 };

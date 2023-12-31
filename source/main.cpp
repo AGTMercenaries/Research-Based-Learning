@@ -5,7 +5,6 @@
 #include "input.h"
 #include "render.h"
 #include "misc.h"
-//#include "loader.h"
 #include "loader/map/anvil.h"
 #include "render/texture/texture.h"
 
@@ -50,8 +49,6 @@ int main() {
 
 	//initTriangle(window);
 	TestCube cube(window);
-	Texture texture("texture\\test.jpg");
-	// ������Ⱦѭ��
 	Texture texture("test");
 	// ������Ⱦѭ��
 	while (!glfwWindowShouldClose(window)) {

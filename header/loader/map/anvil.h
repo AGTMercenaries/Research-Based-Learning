@@ -3,18 +3,15 @@
 
 #include "loader/utils/misc.h"
 #include "loader/map/chunk.h"
+#include "resource.h"
 
 struct Anvil {
 	Chunk chunk[32][32];
+	u8 *offset;
+	Binary data;
 
 	Anvil(std::string location);
-	/**
-	* Get the information of a block in the anvil.
-	*
-	* @param x - x towards the anvil
-	* @param y - y
-	* @param z - z towards the anvil
-	* @return a pointer to Compound of the block.
-	 */
-	Compound* query(int x, int y, int z);
+	Chunk &loadChunk(int x, int z);
+	void unloadChunk(int x, int z);
+	~Anvil();
 };

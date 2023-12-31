@@ -5,7 +5,6 @@
 #include <iostream>
 
 Image::Image(Path loc) {
-	std::cout << loc.path << std::endl;
 	data = stbi_load(loc.path.c_str(), &width, &height, &nrChannels, 0);
 
 	if (!data) {

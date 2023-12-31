@@ -6,7 +6,7 @@
 struct Chunk {
 	pNBT data;
 
-	Chunk(u8* rawData);
+	Chunk(u32 rawLen, u8* rawData);
 	Chunk();
 	void debug();
 	/**

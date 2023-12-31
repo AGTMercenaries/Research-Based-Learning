@@ -6,7 +6,6 @@ private:
 	unsigned int ID;
 
 public:
-	Texture() = default;
 	Texture(std::string name);
 
 	void use();

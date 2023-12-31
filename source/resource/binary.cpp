@@ -4,10 +4,10 @@
 #include <iostream>
 #include <cassert>
 
-Binary::Binary(Location loc, Extension ext) : data(nullptr) {
-	std::ifstream ifs(getPath(loc, ext), std::ios::in | std::ios::binary);
+Binary::Binary(Path loc) : data(nullptr) {
+	std::ifstream ifs(loc.path, std::ios::in | std::ios::binary);
 	if (!ifs.is_open()) {
-		std::cout << "RESOURCE::ERROR::failed to open binary file : " << loc << ext << std::endl;
+		std::cout << "RESOURCE::ERROR::failed to open binary file : " << loc.path << std::endl;
 		assert(false);
 	}
 	ifs.seekg(0, ifs.end);

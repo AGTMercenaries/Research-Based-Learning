@@ -63,7 +63,7 @@ TestCube::TestCube(GLFWwindow* window) {
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	shader = Shader("shader/testCube");
+	shader = Shader("testCube");
 }
 void TestCube::render() {
 	shader.setUniformMatrix4fv("mvp", cam.getMatrix());

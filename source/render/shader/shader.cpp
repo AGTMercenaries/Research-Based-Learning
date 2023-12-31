@@ -1,16 +1,16 @@
 #include "render/shader/shader.h"
-#include "resource/text.h"
 
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <exception>
 #include <cassert>
+#include <resource.h>
 
 Shader::Shader(Location loc) {
-	auto vText = Text(loc, "vs"), fText = Text(loc, "fs");
-	const char* vShaderCode = vText.context.c_str();
-	const char* fShaderCode = fText.context.c_str();
+	auto vShader = Text(VertexShader(loc)), fShader = Text(FragmentShader(loc));
+	const char* vShaderCode = vShader.context.c_str();
+	const char* fShaderCode = fShader.context.c_str();
 
 	unsigned int vertex, fragment;
 	vertex = glCreateShader(GL_VERTEX_SHADER);

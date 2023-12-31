@@ -5,5 +5,5 @@
 struct Text {
 	std::string context;
 
-	Text(Location loc, std::string ext);
+	Text(Path loc);
 };

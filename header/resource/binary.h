@@ -4,6 +4,6 @@
 struct Binary {
 	unsigned char* data;
 
-	Binary(Location loc, Extension ext);
+	Binary(Path loc);
 	~Binary();
 };

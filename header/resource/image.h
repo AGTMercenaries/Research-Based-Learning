@@ -5,6 +5,6 @@
 struct Image {
 	int width, height, nrChannels;
 	unsigned char* data;
-	Image(Location loc);
+	Image(Path loc);
 	~Image();
 };

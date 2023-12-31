@@ -7,7 +7,7 @@
 #include "resource.h"
 
 Anvil::Anvil(Location loc) {
-	Binary data(loc, "mca");
+	Binary data(AnvilFile(loc));
 	for (int x = 0; x < 32; x++)
 		for (int y = 0; y < 32; y++) {
 			int p = (x << 5) | y;

@@ -52,6 +52,8 @@ int main() {
 	TestCube cube(window);
 	Texture texture("texture\\test.jpg");
 	// ������Ⱦѭ��
+	Texture texture("test");
+	// ������Ⱦѭ��
 	while (!glfwWindowShouldClose(window)) {
 		processInput(window);
 

@@ -6,6 +6,7 @@ Camera::Camera() :
 	front(glm::vec3(0.0f, 0.0f, -1.0f)),
 	up(glm::vec3(0.0f, 1.0f, 0.0f)),
 	right(glm::cross(up, front)),
+	rot(glm::quat(1.0f, 0.0f, 0.0f, 0.0f)),
 	fov(glm::radians(45.0f)),
 	zNear(0.1f),
 	zFar(100.0f)
@@ -13,7 +14,7 @@ Camera::Camera() :
 
 glm::mat4x4 Camera::getMatrix() {
 
-	glm::mat4 view = glm::lookAt(pos, pos + front, up);
+	glm::mat4 view = glm::lookAt(pos, pos + rot * front, rot * up);
 
 	glm::mat4 proj(1.0);
 	proj = glm::perspective(fov, (float)width / (float)height, zNear, zFar);
@@ -21,9 +22,7 @@ glm::mat4x4 Camera::getMatrix() {
 	return proj * view;
 }
 
-void Camera::setFront(glm::vec3 v) {
-	front = glm::normalize(v);
-	right = glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), front);
-	up = glm::cross(front, right);
+void Camera::setRotation(glm::quat v) {
+	rot = v;
 }
 

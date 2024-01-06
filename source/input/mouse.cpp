@@ -7,7 +7,7 @@ void framebufferSizeCallback(GLFWwindow* window, int width, int height) {
 }
 
 float lastX = -1, lastY = -1;
-float yaw = -90.0, pitch = 0.0;
+float yaw = 90.0, pitch = 0.0;
 void mouseMoveCallBack(GLFWwindow* window, double xpos, double ypos) {
 
 	float xPos = static_cast<float>(xpos);
@@ -29,10 +29,5 @@ void mouseMoveCallBack(GLFWwindow* window, double xpos, double ypos) {
 	if (pitch < -89.0f)
 		pitch = -89.0f;
 
-	glm::vec3 front(1.0);
-	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-	front.y = sin(glm::radians(pitch));
-	front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-	cam.setFront(front);
-
+	cam.setRotation(glm::quat(glm::vec3(glm::radians(pitch), glm::radians(-yaw), 0.0f)));
 }

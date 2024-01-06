@@ -5,7 +5,7 @@ void processKeyboard(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 	float cameraSpeed = 0.02f;
-	glm::vec3 front = glm::normalize(glm::vec3(cam.front.x, 0.0f, cam.front.z));
+	glm::vec3 front = glm::normalize(glm::vec3((cam.rot * cam.front).x, 0.0f, (cam.rot * cam.front).z));
 	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 	glm::vec3 left = glm::cross(up, front);
 

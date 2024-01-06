@@ -11,11 +11,13 @@ protected:
 	glm::vec3 right;
 	glm::vec3 up;
 
+	glm::quat rot;
+
 	float fov, zNear, zFar;
 
 public:
 	Camera();
 	glm::mat4x4 getMatrix();
-	void setFront(glm::vec3 v);
+	void setRotation(glm::quat v);
 	friend void processKeyboard(GLFWwindow* window);
 };

@@ -1,37 +1,42 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <iostream>
 #include <format>
 
 #include "gl.h"
 #include "input.h"
 #include "render.h"
-#include "misc.h"
+#include "game.h"
 #include "loader/map/anvil.h"
 #include "render/texture/texture.h"
-
-void checknbt();
+#include "loader/map_manager.h"
 
 int main() {
-	//checknbt(); 
-	/*auto anvil = new Anvil("temp\\r.0.0.mca");
-	int p = 25;
-	anvil->query(11, 63, 11)->print();
+
+	{
+
+	MapManager manager;
+	manager.updateChunks();
+
+	freopen("log", "w", stdout);
+
+	for (auto& [coordinate, pChunk] : manager.chunks) {
+		std::cout << std::format("chunk ({}, {}) :", coordinate.first, coordinate.second);
+		if (pChunk->sections) pChunk->sections->print();
+	}
+
+	}
+
+	while (true);
+
 	return 0;
-	for (int i = 0; i < 32; i++)
-		for (int j = 0; j < 32; j++)
-			if (anvil->chunk[i][j].data) {
-				anvil->chunk[i][j].debug();
-				p--;
-				if (!p) return 0;
-			}
-	return 0;*/
-	
 	// 一些准备工作
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	GLFWwindow* window = glfwCreateWindow(width, height, "Game", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(game.width, game.height, "Game", NULL, NULL);
 	if (window == nullptr) {
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();	

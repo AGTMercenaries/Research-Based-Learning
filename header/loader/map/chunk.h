@@ -4,11 +4,13 @@
 #include "loader/utils/nbt.h"
 
 struct Chunk {
-	pNBT data;
+	pNBT data = nullptr;
+	List* sections = nullptr;
 
-	Chunk(u32 rawLen, u8* rawData);
-	Chunk();
-	void debug();
+	Chunk() = delete;
+	Chunk(std::unique_ptr<u8[]> rawData, u32 rawLen);
+
+	// worked by Zaunese
 	/**
 	* Get the information of a block in the chunk.
 	* 
@@ -17,5 +19,5 @@ struct Chunk {
 	* @param z - z towards the chunk
 	* @return a pointer to Compound of the block.
 	 */
-	Compound* query(int x, int y, int z);
+	Compound* query(int x, int y, int z) const;
 };

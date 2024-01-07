@@ -7,21 +7,18 @@
 #include <memory>
 #include <cmath>
 
-Chunk::Chunk() {}
-Chunk::Chunk(u32 rawLen, u8* rawData) {
-	auto binaryData = undeflate(rawData, rawLen);
+Chunk::Chunk(std::unique_ptr<u8[]> rawData, u32 rawLen) { 
+	if (!rawData) return;
+	auto binaryData = undeflate(rawData.get(), rawLen);
 	auto ptrData = binaryData;
 	data = parseNBT(ptrData);
 	delete[] binaryData;
-}
 
-void Chunk::debug() {
 	auto root = dynamic_cast<Compound*>(data.get());
-	auto sections = dynamic_cast<List*>(root->val["sections"].get());
-	sections->print();
+	if (root) sections = dynamic_cast<List*>(root->val["sections"].get());
 }
 
-Compound* Chunk::query(int x, int y, int z){
+Compound* Chunk::query(int x, int y, int z) const {
 	Compound* blockStates = NULL;
 	LongArray* dataArray = NULL;
 	List* palette = NULL;
@@ -33,8 +30,6 @@ Compound* Chunk::query(int x, int y, int z){
 
 	{
 		int id = (y + 64) / 16;
-		auto root = dynamic_cast<Compound*>(data.get());
-		auto sections = dynamic_cast<List*>(root->val["sections"].get());
 		auto sub = dynamic_cast<Compound*>(sections->val[id].get());
 		blockStates = dynamic_cast<Compound*>(sub->val["block_states"].get());
 		palette = dynamic_cast<List*>(blockStates->val["palette"].get());

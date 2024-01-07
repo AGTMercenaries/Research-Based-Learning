@@ -7,8 +7,7 @@
 *.sln
 *.vcxproj
 *.vcxproj.filters
-path.cpp
-resource/temp/*
+log
 
 resource/textures/*
 

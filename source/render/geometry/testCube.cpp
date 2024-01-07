@@ -1,4 +1,5 @@
 #include "render/geometry/testCube.h"
+#include "game.h"
 
 TestCube::TestCube(GLFWwindow* window) {
 	float vertices[] = {
@@ -66,7 +67,7 @@ TestCube::TestCube(GLFWwindow* window) {
 	shader = Shader("testCube");
 }
 void TestCube::render() {
-	shader.setUniformMatrix4fv("mvp", cam.getMatrix());
+	shader.setUniformMatrix4fv("mvp", game.cam.getMatrix());
 	shader.use();
 	glBindVertexArray(VAO);
 	glDrawArrays(GL_TRIANGLES, 0, 36);

@@ -7,14 +7,14 @@
 #include "resource.h"
 
 Anvil::Anvil(Location loc) : data(AnvilFile(loc)) {
-	offset = data.getData(0, 4096);
+	if (data.stream.good()) offset = data.getData(0, 4096);
 }
-Chunk& Anvil::loadChunk(int x, int z) {
-	if (chunk[x][z].data) return chunk[x][z];
+std::pair<std::unique_ptr<u8[]>, u32> Anvil::getChunkData(int x, int z) {
+	if (!offset) return { nullptr, 0 };
+
 	int p = (x << 5) | z;
 	auto pChunkInfo = data.getData(p * 4, 4);
-	u32 chunkInfo = *(u32*)(pChunkInfo);
-	delete pChunkInfo;
+	u32 chunkInfo = *(u32*)(pChunkInfo.get());
 	if (chunkInfo != 0) {
 		u8* infoPtr = (u8*)&chunkInfo;
 		infoPtr[3] = 0; // Useless info : chunk size
@@ -22,23 +22,14 @@ Chunk& Anvil::loadChunk(int x, int z) {
 		chunkInfo = BE2LE_32BIT(chunkInfo);
 		size_t chunkOffset = (chunkInfo >> 8) * 4096;
 
-		u8 *pRawLen = data.getData(chunkOffset, 4);
-		u32 rawLen = *(u32*)pRawLen;
-		delete pRawLen;
+		auto pRawLen = data.getData(chunkOffset, 4);
+		u32 rawLen = *(u32*)(pRawLen.get());
 		rawLen = BE2LE_32BIT(rawLen);
 		
-		u8* rawData = data.getData(chunkOffset + 5, rawLen); // 4 byte length | 1 byte compress method
+		auto rawData = data.getData(chunkOffset + 5, rawLen); // 4 byte length | 1 byte compress method
+		return { std::move(rawData), rawLen};
 		
-		chunk[x][z] = Chunk(rawLen, rawData);
-		
-		delete rawData;
 	}
-	return chunk[x][z];
-}
-void Anvil::unloadChunk(int x, int z) {
-	chunk[x][z].data.release();
-}
-
-Anvil::~Anvil() {
-	delete offset;
+	
+	return { nullptr, 0 };
 }

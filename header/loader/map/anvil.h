@@ -1,17 +1,18 @@
 #pragma once
-#include <string>
 
 #include "loader/utils/misc.h"
 #include "loader/map/chunk.h"
 #include "resource.h"
 
+#include <string>
+#include <memory>
+#include <utility>
+
+
 struct Anvil {
-	Chunk chunk[32][32];
-	u8 *offset;
+	std::unique_ptr<u8[]> offset = nullptr;
 	Binary data;
 
 	Anvil(std::string location);
-	Chunk &loadChunk(int x, int z);
-	void unloadChunk(int x, int z);
-	~Anvil();
+	std::pair<std::unique_ptr<u8[]>, u32> getChunkData(int x, int z);
 };

@@ -10,4 +10,4 @@ Path::Path(std::string s) : path(s) {}
 const ResourceType VertexShader("shaders", "vs");
 const ResourceType FragmentShader("shaders", "fs");
 const ResourceType TextureImage("textures", "png");
-const ResourceType AnvilFile("map", "mca");
+const ResourceType AnvilFile("map/anvils", "mca");

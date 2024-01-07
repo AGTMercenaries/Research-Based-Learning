@@ -7,11 +7,9 @@
 *.sln
 *.vcxproj
 *.vcxproj.filters
-path.cpp
-resource/temp/*
+log
 
-resource/temp/*
-resource/tool/*
+resource/textures/*
 
 # User-specific files
 *.rsuser

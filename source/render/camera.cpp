@@ -1,5 +1,5 @@
 #include "render/camera.h"
-#include "misc.h"
+#include "game.h"
 
 Camera::Camera() :
 	pos(glm::vec3(0.0f, 0.0f, 3.0f)),
@@ -16,7 +16,7 @@ glm::mat4x4 Camera::getMatrix() {
 	glm::mat4 view = glm::lookAt(pos, pos + front, up);
 
 	glm::mat4 proj(1.0);
-	proj = glm::perspective(fov, (float)width / (float)height, zNear, zFar);
+	proj = glm::perspective(fov, (float)game.width / (float)game.height, zNear, zFar);
 
 	return proj * view;
 }

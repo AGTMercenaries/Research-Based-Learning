@@ -1,7 +1,6 @@
 #pragma once
 #include "gl.h"
-#include "glm.h"
-#include "misc.h"
+#include "utils/glm.h"
 
 void processInput(GLFWwindow* window);
 void processKeyboard(GLFWwindow* window);

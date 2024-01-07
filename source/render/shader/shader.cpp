@@ -1,35 +1,33 @@
 #include "render/shader/shader.h"
-#include "utils/file.h"
 
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <exception>
 #include <cassert>
+#include <resource.h>
 
-Shader::Shader(std::string name) {
-
-	std::string vs = getFile("shader\\" + name + ".vs");
-	std::string fs = getFile("shader\\" + name + ".fs");
-	const char* vShaderCode = vs.c_str();
-	const char* fShaderCode = fs.c_str();
+Shader::Shader(Location loc) {
+	auto vShader = Text(VertexShader(loc)), fShader = Text(FragmentShader(loc));
+	const char* vShaderCode = vShader.context.c_str();
+	const char* fShaderCode = fShader.context.c_str();
 
 	unsigned int vertex, fragment;
 	vertex = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertex, 1, &vShaderCode, NULL);
 	glCompileShader(vertex);
-	checkShaderCompile(vertex, name + ".vs");
+	checkShaderCompile(vertex, loc);
 
 	fragment = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragment, 1, &fShaderCode, NULL);
 	glCompileShader(fragment);
-	checkShaderCompile(fragment, name + ".fs");
+	checkShaderCompile(fragment, loc);
 
 	ID = glCreateProgram();
 	glAttachShader(ID, vertex);
 	glAttachShader(ID, fragment);
 	glLinkProgram(ID);
-	checkProgramLink(ID, name);
+	checkProgramLink(ID, loc);
 
 	glDeleteShader(vertex);
 	glDeleteShader(fragment);
